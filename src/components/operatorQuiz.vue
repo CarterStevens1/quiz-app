@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-if="isStarted">
+      <!-- shows the numbers and operator -->
       <h4>{{ operandLeft }} {{ operator }} {{ operandRight }}</h4>
+      <!-- button for the answers  -->
       <button
         @click="selectAnswer(answer)"
         v-for="(answer, index) of answers"
@@ -10,7 +12,7 @@
         {{ answer }}
       </button>
     </div>
-
+    <!-- start and back buttons -->
     <div v-if="!isStarted">
       <button @click="startQuiz">Start</button>
     </div>
@@ -28,11 +30,11 @@ export default {
       operandRight: null,
       answers: [],
       expectedAnswer: null,
-
-      lastAnswer: [],
     };
   },
+
   methods: {
+    // select answer method
     selectAnswer(answerSelected) {
       if (answerSelected !== this.expectedAnswer) {
         alert("Wrong Answer, Try again!");
@@ -40,11 +42,12 @@ export default {
         this.startQuiz();
       }
     },
+    // starts the quiz with the random numbers
     startQuiz() {
       this.isStarted = true;
       this.operandLeft = parseInt(Math.random() * 13);
       this.operandRight = parseInt(Math.random() * 13);
-
+      // all methods
       const methods = {
         "+": (a, b) => a + b,
         "-": (a, b) => a - b,
@@ -53,13 +56,13 @@ export default {
       };
 
       const methodToUse = methods[this.operator];
-
+      // brings the array back to empty
       this.answers = [];
-      this.lastAnswer = [];
 
+      // expected answer as answer btn
       const expectedAnswer = methodToUse(this.operandLeft, this.operandRight);
       let i = 0;
-
+      // loop to print the numbers and make sure none are duplicates
       while (i < 5) {
         const answer = methodToUse(
           parseInt(Math.random() * 13),
@@ -78,7 +81,7 @@ export default {
           i++;
         }
       }
-
+      // expected answer formula
       this.answers[
         parseInt(Math.random() * this.answers.length)
       ] = expectedAnswer;

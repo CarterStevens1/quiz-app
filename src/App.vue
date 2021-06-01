@@ -1,12 +1,13 @@
 <template>
   <div class="app">
     <h1>Math Quiz App</h1>
-
+    <!-- pulls in the operator quiz -->
     <operator-quiz
       @onBack="clearOperator"
       v-if="operator"
       :operator="operator"
     />
+    <!-- pulls in the operator selector buttons -->
     <operatorSelector v-if="!operator" @selectOperator="selectOperator" />
   </div>
 </template>

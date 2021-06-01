@@ -1,4 +1,5 @@
 <template>
+  <!-- creates the buttons for each operator -->
   <div>
     <button @click="$emit('selectOperator', '+')">Addition <br />+</button>
 
